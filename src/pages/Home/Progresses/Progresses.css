@@ -1,0 +1,25 @@
+.progresses-control {
+  gap: 12px;
+  height: 32px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  display: inline-flex;
+}
+
+.progresses-content {
+  flex: 0 0 auto;
+}
+
+.btn {
+  border: 0;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: var(--white-font-color);
+  background-color: var(--secondary-backgrond-color);
+}
+
+.btn:active {
+  border: 1px solid;
+}
