@@ -36,5 +36,6 @@
 }
 
 .selected {
-  border: 2px solid var(--white-font-color);
+  border-radius: 6px;
+  border: 1px solid var(--white-font-color);
 }
