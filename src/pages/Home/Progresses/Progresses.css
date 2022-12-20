@@ -1,13 +1,18 @@
-.progresses-control {
-  gap: 12px;
-  height: 32px;
-  flex-wrap: wrap;
-  margin-top: 32px;
-  display: inline-flex;
+.progresses {
+  display: flex;
+  flex-direction: column;
 }
 
 .progresses-content {
   flex: 0 0 auto;
+}
+
+.progresses-control {
+  gap: 12px;
+  height: 32px;
+  flex-wrap: wrap;
+  margin: 32px auto 0;
+  display: inline-flex;
 }
 
 .btn {
@@ -17,9 +22,14 @@
   border-radius: 0;
   box-sizing: border-box;
   color: var(--white-font-color);
-  background-color: var(--secondary-backgrond-color);
+  background-color: var(--secondary-background-color);
 }
 
 .btn:active {
   border: 1px solid;
+}
+
+.btn:disabled {
+  color: var(--primary-background-color);
+  cursor: not-allowed;
 }

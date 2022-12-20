@@ -1,5 +1,7 @@
 .progress-group {
-  margin-bottom: 24px;
+  cursor: pointer;
+  padding: 24px 16px;
+  margin-bottom: 8px;
 }
 
 .progress-wrapper {
@@ -19,7 +21,7 @@
   flex-grow: 1;
   height: 12px;
   border-radius: 0%;
-  background-color: var(--secondary-backgrond-color);
+  background-color: var(--secondary-background-color);
 }
 
 .progress-bar {
@@ -31,4 +33,8 @@
   margin: 0 0 8px 0;
   font-size: 0.7rem;
   text-align: initial;
+}
+
+.selected {
+  border: 2px solid var(--white-font-color);
 }

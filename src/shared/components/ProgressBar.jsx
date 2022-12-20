@@ -1,36 +1,43 @@
 import React, { useEffect, useRef } from "react";
 
-import { colorsLevel } from "shared/utils/progress-colors";
+import { getColor } from "shared/utils";
 
 import "./ProgressBar.css";
 
-const ProgressBar = ({ progressItem }) => {
+const ProgressBar = ({ progressItem, setProgressArray, setDisabledBtn }) => {
   const ref = useRef();
+
+  const handleSelect = () => {
+    setDisabledBtn((prev) => {
+      if (prev) return false;
+      return prev;
+    });
+
+    setProgressArray((prev) => {
+      const result = prev.map((item) => {
+        if (item.id === progressItem.id) {
+          item.selected = true;
+        } else item.selected = false;
+        return item;
+      });
+      return result;
+    });
+  };
 
   useEffect(() => {
     if (ref.current == null) {
       return;
     }
-    const getColor = () => {
-      if (progressItem.value === 0) {
-        return null;
-      } else if (progressItem.value <= 25) {
-        return colorsLevel.low;
-      } else if (progressItem.value <= 50) {
-        return colorsLevel.medium;
-      } else if (progressItem.value <= 75) {
-        return colorsLevel.hight;
-      } else if (progressItem.value === 100) {
-        return colorsLevel.complete;
-      }
-    };
-    const color = getColor();
+    const color = getColor(progressItem.value);
     ref.current.style.backgroundColor = color;
     ref.current.style.width = `${progressItem.value}%`;
   }, [progressItem.value]);
 
   return (
-    <div className="progress-group">
+    <div
+      className={`progress-group ${progressItem.selected ? "selected" : ""}`}
+      onClick={handleSelect}
+    >
       <p className="progress-title">{progressItem.title}</p>
       <div className="progress-wrapper">
         <span htmlFor="file" className="progress-value">

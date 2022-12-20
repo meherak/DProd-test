@@ -4,3 +4,17 @@ export const colorsLevel = {
   hight: "#60E8B6",
   complete: "#30DB63",
 };
+
+export const getColor = (value) => {
+  if (value === 0) {
+    return null;
+  } else if (value <= 25) {
+    return colorsLevel.low;
+  } else if (value <= 50) {
+    return colorsLevel.medium;
+  } else if (value <= 75) {
+    return colorsLevel.hight;
+  } else if (value === 100) {
+    return colorsLevel.complete;
+  }
+};

@@ -5,10 +5,10 @@ import Progresses from "pages/Home/Progresses/Progresses";
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <Header />
       <Progresses />
-    </div>
+    </>
   );
 };
 

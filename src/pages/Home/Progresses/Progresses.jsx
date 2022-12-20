@@ -5,28 +5,40 @@ import ProgressBar from "shared/components/ProgressBar";
 import "./Progresses.css";
 
 const Progresses = () => {
+  const [disabledBtn, setDisabledBtn] = useState(true);
   const [progressArray, setProgressArray] = useState([
-    { title: "Initialisation de test technique", value: 50, id: 0 },
-    { title: "Avancement de la phase dévelopement", value: 20, id: 1 },
+    {
+      id: 0,
+      value: 50,
+      selected: false,
+      title: "Initialisation de test technique",
+    },
+    {
+      id: 1,
+      value: 20,
+      selected: false,
+      title: "Avancement de la phase dévelopement",
+    },
   ]);
 
   const handleProgress = (step) => {
     setProgressArray((prev) => {
-      const result = prev.map((item) => {
-        if (item.value + step <= 100) {
+      const newProgresses = prev.map((item) => {
+        if (item.value + step <= 100 && item.selected) {
           return { ...item, value: item.value + step };
         } else return item;
       });
-      return result;
+      return newProgresses;
     });
   };
 
   const handleResetProgress = () => {
     setProgressArray((prev) => {
-      const result = prev.map((item) => {
-        return { ...item, value: 0 };
+      const newProgresses = prev.map((item) => {
+        if (item.selected) return { ...item, value: 0 };
+        return item;
       });
-      return result;
+      return newProgresses;
     });
   };
 
@@ -34,17 +46,34 @@ const Progresses = () => {
     <div className="progresses">
       <div className="progresses-content">
         {progressArray.map((item, index) => (
-          <ProgressBar progressItem={item} key={index} />
+          <ProgressBar
+            key={index}
+            progressItem={item}
+            setDisabledBtn={setDisabledBtn}
+            setProgressArray={setProgressArray}
+          />
         ))}
       </div>
       <div className="progresses-control">
-        <button className="btn" onClick={handleResetProgress}>
-          Remèttre à zero les compteurs
+        <button
+          className="btn"
+          disabled={disabledBtn}
+          onClick={handleResetProgress}
+        >
+          Remèttre à zero le compteur
         </button>
-        <button className="btn" onClick={() => handleProgress(5)}>
+        <button
+          className="btn"
+          disabled={disabledBtn}
+          onClick={() => handleProgress(5)}
+        >
           Ajouter 5%
         </button>
-        <button className="btn" onClick={() => handleProgress(10)}>
+        <button
+          className="btn"
+          disabled={disabledBtn}
+          onClick={() => handleProgress(10)}
+        >
           Ajouter 10%
         </button>
       </div>
