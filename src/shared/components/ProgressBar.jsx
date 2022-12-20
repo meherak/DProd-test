@@ -8,15 +8,12 @@ const ProgressBar = ({ progressItem, setProgressArray, setDisabledBtn }) => {
   const ref = useRef();
 
   const handleSelect = () => {
+    setDisabledBtn(progressItem.selected);
+    
     setProgressArray((prev) => {
       const newProgresses = prev.map((item) => {
-        if (item.id === progressItem.id && item.selected) {
-          setDisabledBtn(true);
-          return { ...item, selected: false };
-        }
         if (item.id === progressItem.id) {
-          setDisabledBtn(false);
-          return { ...item, selected: true };
+          return { ...item, selected: !item.selected };
         } else return { ...item, selected: false };
       });
       return newProgresses;
@@ -39,7 +36,7 @@ const ProgressBar = ({ progressItem, setProgressArray, setDisabledBtn }) => {
     >
       <p className="progress-title">{progressItem.title}</p>
       <div className="progress-wrapper">
-        <span htmlFor="file" className="progress-value">
+        <span className="progress-value">
           {progressItem.value}%
         </span>
         <div className="progress-thin">
