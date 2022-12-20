@@ -8,19 +8,18 @@ const ProgressBar = ({ progressItem, setProgressArray, setDisabledBtn }) => {
   const ref = useRef();
 
   const handleSelect = () => {
-    setDisabledBtn((prev) => {
-      if (prev) return false;
-      return prev;
-    });
-
     setProgressArray((prev) => {
-      const result = prev.map((item) => {
+      const newProgresses = prev.map((item) => {
+        if (item.id === progressItem.id && item.selected) {
+          setDisabledBtn(true);
+          return { ...item, selected: false };
+        }
         if (item.id === progressItem.id) {
-          item.selected = true;
-        } else item.selected = false;
-        return item;
+          setDisabledBtn(false);
+          return { ...item, selected: true };
+        } else return { ...item, selected: false };
       });
-      return result;
+      return newProgresses;
     });
   };
 

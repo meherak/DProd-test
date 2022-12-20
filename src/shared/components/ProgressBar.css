@@ -2,6 +2,24 @@
   cursor: pointer;
   padding: 24px 16px;
   margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.progress-group:hover:not(.selected){
+  border-radius: 6px;
+  border: 1px solid var(--secondary-background-color);
+}
+
+.selected {
+  border-radius: 6px;
+  border: 1px solid var(--white-font-color);
+}
+
+.progress-title {
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-size: 0.7rem;
+  text-align: initial;
 }
 
 .progress-wrapper {
@@ -26,16 +44,4 @@
 
 .progress-bar {
   height: 100%;
-}
-
-.progress-title {
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  font-size: 0.7rem;
-  text-align: initial;
-}
-
-.selected {
-  border-radius: 6px;
-  border: 1px solid var(--white-font-color);
 }
