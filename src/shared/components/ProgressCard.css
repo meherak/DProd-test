@@ -15,6 +15,26 @@
   border: 1px solid var(--white-font-color);
 }
 
+.progress-card-menu {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  cursor: default;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-background-color);
+}
+
+.dropdown-menu {
+  top: 24px;
+  right: 8px;
+  display: block;
+  position: absolute;
+}
+
 .progress-title {
   font-weight: 600;
   margin: 0 0 8px 0;
@@ -72,4 +92,12 @@
 .btn:disabled {
   cursor: not-allowed;
   color: var(--primary-background-color);
+}
+
+.btn-danger {
+  color: var(--danger-font-color);
+}
+
+.btn-danger:active {
+  border: 1px solid var(--danger-font-color);
 }
