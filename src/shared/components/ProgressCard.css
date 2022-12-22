@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-.progress-group:hover:not(.selected){
+.progress-group:hover:not(.selected) {
   border-radius: 6px;
   border: 1px solid var(--secondary-background-color);
 }
@@ -44,4 +44,32 @@
 
 .progress-bar {
   height: 100%;
+}
+
+.progress-control {
+  gap: 12px;
+  height: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 32px auto 0;
+  justify-content: center;
+}
+
+.btn {
+  border: 0;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: var(--white-font-color);
+  background-color: var(--secondary-background-color);
+}
+
+.btn:active {
+  border: 1px solid;
+}
+
+.btn:disabled {
+  color: var(--primary-background-color);
+  cursor: not-allowed;
 }
