@@ -1,11 +1,11 @@
-.progress-group {
+.progress-card {
   cursor: pointer;
   padding: 24px 16px;
   margin-bottom: 8px;
   box-sizing: border-box;
 }
 
-.progress-group:hover:not(.selected) {
+.progress-card:hover:not(.selected) {
   border-radius: 6px;
   border: 1px solid var(--secondary-background-color);
 }
