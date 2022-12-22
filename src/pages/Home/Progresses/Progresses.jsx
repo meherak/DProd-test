@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-import ProgressCard from "shared/components/ProgressCard";
+import { ProgressCard } from "shared/components/ProgressCard";
 
 import "./Progresses.css";
 
-const Progresses = () => {
+export const Progresses = () => {
   const [progressArray, setProgressArray] = useState([
     {
       id: 0,
@@ -20,8 +20,25 @@ const Progresses = () => {
     },
   ]);
 
+  const handleAddItem = () => {
+    const newItem = {
+      id: progressArray.length + 1,
+      value: 0,
+      selected: false,
+      title: "Nouvelle barre de progression",
+    };
+    setProgressArray((prev) => {
+      return [newItem, ...prev];
+    });
+  };
+
   return (
     <div className="progresses">
+      <div className="progresses-header">
+        <button className="btn btn-success" onClick={handleAddItem}>
+          Ajouter
+        </button>
+      </div>
       <div className="progresses-content">
         {progressArray.map((item, index) => (
           <ProgressCard
@@ -34,5 +51,3 @@ const Progresses = () => {
     </div>
   );
 };
-
-export default Progresses;

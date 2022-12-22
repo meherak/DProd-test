@@ -3,6 +3,8 @@
 :root {
   --main-font: "Roboto", sans-serif;
   --white-font-color: #fff;
+  --secondary-font-color: var(--secondary-background-color);
   --primary-background-color: #202124;
   --secondary-background-color: #303236;
+  --success-color: #30db63;
 }

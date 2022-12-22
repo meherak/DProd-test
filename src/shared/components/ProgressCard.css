@@ -70,6 +70,6 @@
 }
 
 .btn:disabled {
-  color: var(--primary-background-color);
   cursor: not-allowed;
+  color: var(--primary-background-color);
 }

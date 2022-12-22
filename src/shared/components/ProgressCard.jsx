@@ -4,13 +4,13 @@ import { getColor } from "shared/utils";
 
 import "./ProgressCard.css";
 
-const ProgressBar = ({ progressItem, setProgressArray }) => {
+export const ProgressCard = ({ progressItem, setProgressArray }) => {
   const ref = useRef();
 
   const handleSelect = () => {
     setProgressArray((prev) => {
       const newProgresses = prev.map((item) => {
-        if (item.id === progressItem.id) {
+        if (item?.id === progressItem.id) {
           return { ...item, selected: !item.selected };
         } else return { ...item, selected: false };
       });
@@ -45,25 +45,27 @@ const ProgressBar = ({ progressItem, setProgressArray }) => {
     if (ref.current == null) {
       return;
     }
-    const color = getColor(progressItem.value);
+    const color = getColor(progressItem?.value);
     ref.current.style.backgroundColor = color;
-    ref.current.style.width = `${progressItem.value}%`;
-  }, [progressItem.value]);
+    ref.current.style.width = `${progressItem?.value}%`;
+  }, [progressItem?.value]);
 
   return (
     <div
-      className={`progress-card ${progressItem.selected ? "selected" : ""}`}
+      className={`progress-card ${
+        progressItem?.selected ? "selected" : ""
+      }`.trim()}
       onClick={handleSelect}
     >
-      <p className="progress-title">{progressItem.title}</p>
+      <p className="progress-title">{progressItem?.title}</p>
       <div className="progress-wrapper">
-        <span className="progress-value">{progressItem.value}%</span>
+        <span className="progress-value">{progressItem?.value}%</span>
         <div className="progress-thin">
           <div className="progress-bar" ref={ref}></div>
         </div>
       </div>
 
-      {progressItem.selected && (
+      {progressItem?.selected && (
         <div className="progress-control">
           <button className="btn" onClick={handleResetProgress}>
             Remèttre à zero le compteur
@@ -76,9 +78,6 @@ const ProgressBar = ({ progressItem, setProgressArray }) => {
           </button>
         </div>
       )}
-      
     </div>
   );
 };
-
-export default ProgressBar;
