@@ -4,8 +4,12 @@
   --main-font: "Roboto", sans-serif;
   --white-font-color: #fff;
   --danger-font-color: #ff150093;
+  --warning-font-color: #ffb300f4;
   --secondary-font-color: var(--secondary-background-color);
   --primary-background-color: #202124;
   --secondary-background-color: #303236;
+  --light-grey-background-color: #4a4d53;
   --success-color: #30db63;
+  --color-shadow-large: 0 8px 24px #162316;
+  --color-shadow-medium: 0 3px 6px #162316;
 }

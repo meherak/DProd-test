@@ -6,15 +6,11 @@ export const colorsLevel = {
 };
 
 export const getColor = (value) => {
-  if (value === 0) {
-    return null;
-  } else if (value <= 25) {
-    return colorsLevel.low;
-  } else if (value <= 50) {
-    return colorsLevel.medium;
-  } else if (value <= 75) {
-    return colorsLevel.high;
-  } else if (value === 100) {
-    return colorsLevel.complete;
-  }
+  return (
+    (value === 0 && null) ||
+    (value > 0 && value <= 25 && colorsLevel.low) ||
+    (value > 25 && value <= 50 && colorsLevel.medium) ||
+    (value > 50 && value < 100 && colorsLevel.high) ||
+    (value === 100 && colorsLevel.complete)
+  );
 };

@@ -35,6 +35,13 @@ export const Progresses = () => {
   return (
     <div className="progresses">
       <div className="progresses-header">
+        <a
+          target="_blanc"
+          className="btn btn-feedback"
+          href="mailto:akermi.meher@gmail.com"
+        >
+          Feedback
+        </a>
         <button className="btn btn-success" onClick={handleAddItem}>
           Ajouter
         </button>

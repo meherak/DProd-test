@@ -5,14 +5,30 @@
 
 .progresses-header {
   width: 98%;
-  margin: 0 auto;
   display: flex;
-  justify-content: end;
-  border-bottom: 1px solid var(--success-color);
+  margin: 0 auto;
+  border-image-slice: 1;
+  border-bottom: 2px solid;
+  justify-content: space-between;
+  border-image-source: linear-gradient(to right, #7160e8, var(--success-color));
 }
 
 .progresses-content {
   flex: 0 0 auto;
+}
+
+.btn-feedback {
+  border-bottom: 0;
+  text-decoration: inherit;
+  position: relative;
+  border-radius: 6px 6px 0 0;
+  background-color: #7160e8;
+  color: var(--white-font-color);
+}
+
+.btn-feedback:visited {
+  text-decoration: inherit;
+  color: var(--white-font-color);
 }
 
 .btn-success {

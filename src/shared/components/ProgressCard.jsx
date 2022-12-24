@@ -1,23 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { getColor } from "shared/utils";
+import { useOutsideClickEvent } from "shared/hooks/useOutsideClickEvent";
 
 import "./ProgressCard.css";
 
 export const ProgressCard = ({ progressItem, setProgressArray }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
+
   const ref = useRef();
+  const dropdownRef = useRef();
+
+  useOutsideClickEvent(dropdownRef, setToggleDropdown);
 
   const handleToggleOptions = (e) => {
     e.stopPropagation();
-    setToggleDropdown((prev) => !prev);
+    setToggleDropdown(true);
   };
 
-  const handleDeleteItem = () => {
+  const handleDeleteItem = (e) => {
     setProgressArray((prev) => {
       const newProgresses = prev.filter((item) => item.id !== progressItem.id);
       return newProgresses;
     });
+    e.stopPropagation();
+    setToggleDropdown(false);
+  };
+
+  const handleEditItem = (e) => {
+    e.stopPropagation();
+    setToggleDropdown(false);
   };
 
   const handleSelect = () => {
@@ -70,7 +82,11 @@ export const ProgressCard = ({ progressItem, setProgressArray }) => {
       }`.trim()}
       onClick={handleSelect}
     >
-      <div className="progress-card-menu" onClick={handleToggleOptions}>
+      <div
+        ref={dropdownRef}
+        className="progress-card-kebab-menu"
+        onClick={handleToggleOptions}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -83,7 +99,16 @@ export const ProgressCard = ({ progressItem, setProgressArray }) => {
         </svg>
         {toggleDropdown && (
           <div className="dropdown-menu">
-            <button className="btn btn-danger" onClick={handleDeleteItem}>
+            <button
+              onClick={handleEditItem}
+              className="btn btn-warning dropdown-item"
+            >
+              Modifier
+            </button>
+            <button
+              onClick={handleDeleteItem}
+              className="btn btn-danger dropdown-item"
+            >
               Suprimer
             </button>
           </div>

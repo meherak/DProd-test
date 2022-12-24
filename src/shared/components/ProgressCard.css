@@ -1,25 +1,27 @@
 .progress-card {
+  padding: 16px;
   cursor: pointer;
-  padding: 24px 16px;
   margin-bottom: 8px;
   box-sizing: border-box;
 }
 
 .progress-card:hover:not(.selected) {
   border-radius: 6px;
+  box-shadow: var(--color-shadow-medium);
   border: 1px solid var(--secondary-background-color);
 }
 
 .selected {
   border-radius: 6px;
+  box-shadow: var(--color-shadow-large);
   border: 1px solid var(--white-font-color);
 }
 
-.progress-card-menu {
+.progress-card-kebab-menu {
   width: 24px;
   height: 24px;
   display: flex;
-  cursor: default;
+  cursor: pointer;
   border-radius: 50%;
   position: relative;
   margin: 0 0 0 auto;
@@ -28,11 +30,21 @@
   background-color: var(--secondary-background-color);
 }
 
+.progress-card-kebab-menu:hover {
+  background-color: var(--light-grey-background-color);
+}
+
 .dropdown-menu {
   top: 24px;
   right: 8px;
+  padding: 8px 0;
   display: block;
+  cursor: default;
+  min-width: 128px;
+  border-radius: 6px;
   position: absolute;
+  box-shadow: var(--color-shadow-large);
+  border: 1px solid var(--secondary-background-color);
 }
 
 .progress-title {
@@ -85,6 +97,10 @@
   background-color: var(--secondary-background-color);
 }
 
+.btn:hover:not(.btn-success,.btn-feedback) {
+  background-color: var(--light-grey-background-color);
+}
+
 .btn:active {
   border: 1px solid;
 }
@@ -95,9 +111,11 @@
 }
 
 .btn-danger {
+  width: 100%;
   color: var(--danger-font-color);
 }
 
-.btn-danger:active {
-  border: 1px solid var(--danger-font-color);
+.btn-warning {
+  width: 100%;
+  color: var(--warning-font-color);
 }
