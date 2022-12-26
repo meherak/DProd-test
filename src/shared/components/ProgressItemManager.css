@@ -1,0 +1,33 @@
+.form-wrapper {
+  padding: 8px 16px;
+}
+
+.form-row {
+  gap: 16px;
+  display: flex;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-title {
+  width: 15%;
+}
+
+input {
+  flex-grow: 1;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--white-font-color);
+  border: 1px solid var(--border-color-secondary);
+  background-color: var(--secondary-background-color);
+}
+
+input:focus {
+  outline: solid 1px var(--border-color-primary);
+}
+
+.form-submit{
+  display: flex;
+  justify-content: flex-end;
+}

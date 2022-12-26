@@ -1,15 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { icons } from "shared/utils";
 import { getColor } from "shared/utils";
-import { useOutsideClickEvent } from "shared/hooks/useOutsideClickEvent";
+import { useModal } from "shared/hooks";
+import { Modal } from "shared/components/Modal";
+import { useOutsideClickEvent } from "shared/hooks";
+import { ProgressItemManager } from "shared/components/ProgressItemManager";
 
 import "./ProgressCard.css";
 
 export const ProgressCard = ({ progressItem, setProgressArray }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const { isShowing, toggle } = useModal(false);
 
-  const ref = useRef();
   const dropdownRef = useRef();
+  const progressBarRef = useRef();
 
   useOutsideClickEvent(dropdownRef, setToggleDropdown);
 
@@ -30,6 +35,7 @@ export const ProgressCard = ({ progressItem, setProgressArray }) => {
   const handleEditItem = (e) => {
     e.stopPropagation();
     setToggleDropdown(false);
+    toggle();
   };
 
   const handleSelect = () => {
@@ -67,74 +73,70 @@ export const ProgressCard = ({ progressItem, setProgressArray }) => {
   };
 
   useEffect(() => {
-    if (ref.current == null) {
+    if (progressBarRef.current == null) {
       return;
     }
-    const color = getColor(progressItem?.value);
-    ref.current.style.backgroundColor = color;
-    ref.current.style.width = `${progressItem?.value}%`;
+    const color = getColor(progressItem.value);
+    progressBarRef.current.style.backgroundColor = color;
+    progressBarRef.current.style.width = `${progressItem.value}%`;
   }, [progressItem?.value]);
 
   return (
-    <div
-      className={`progress-card ${
-        progressItem?.selected ? "selected" : ""
-      }`.trim()}
-      onClick={handleSelect}
-    >
+    <>
+      <Modal isShowing={isShowing} toggle={toggle}>
+        <ProgressItemManager toggle={toggle} />
+      </Modal>
       <div
-        ref={dropdownRef}
-        className="progress-card-kebab-menu"
-        onClick={handleToggleOptions}
+        className={`progress-card ${
+          progressItem.selected ? "selected" : ""
+        }`.trim()}
+        onClick={handleSelect}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          className="bi bi-three-dots-vertical"
-          viewBox="0 0 16 16"
+        <div
+          ref={dropdownRef}
+          onClick={handleToggleOptions}
+          className="progress-card-kebab-menu"
         >
-          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-        </svg>
-        {toggleDropdown && (
-          <div className="dropdown-menu">
-            <button
-              onClick={handleEditItem}
-              className="btn btn-warning dropdown-item"
-            >
-              Modifier
+          {icons.kebabIcon}
+          {toggleDropdown && (
+            <div className="dropdown-menu">
+              <button
+                onClick={handleEditItem}
+                className="btn btn-warning dropdown-item"
+              >
+                Modifier
+              </button>
+              <button
+                onClick={handleDeleteItem}
+                className="btn btn-danger dropdown-item"
+              >
+                Suprimer
+              </button>
+            </div>
+          )}
+        </div>
+        <p className="progress-title">{progressItem.title}</p>
+        <div className="progress-wrapper">
+          <span className="progress-value">{progressItem.value}%</span>
+          <div className="progress-thin">
+            <div className="progress-bar" ref={progressBarRef}></div>
+          </div>
+        </div>
+
+        {progressItem.selected && (
+          <div className="progress-control">
+            <button className="btn" onClick={handleResetProgress}>
+              Remèttre à zero le compteur
             </button>
-            <button
-              onClick={handleDeleteItem}
-              className="btn btn-danger dropdown-item"
-            >
-              Suprimer
+            <button className="btn" onClick={(e) => handleProgress(e, 5)}>
+              Ajouter 5%
+            </button>
+            <button className="btn" onClick={(e) => handleProgress(e, 10)}>
+              Ajouter 10%
             </button>
           </div>
         )}
       </div>
-      <p className="progress-title">{progressItem?.title}</p>
-      <div className="progress-wrapper">
-        <span className="progress-value">{progressItem?.value}%</span>
-        <div className="progress-thin">
-          <div className="progress-bar" ref={ref}></div>
-        </div>
-      </div>
-
-      {progressItem?.selected && (
-        <div className="progress-control">
-          <button className="btn" onClick={handleResetProgress}>
-            Remèttre à zero le compteur
-          </button>
-          <button className="btn" onClick={(e) => handleProgress(e, 5)}>
-            Ajouter 5%
-          </button>
-          <button className="btn" onClick={(e) => handleProgress(e, 10)}>
-            Ajouter 10%
-          </button>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
